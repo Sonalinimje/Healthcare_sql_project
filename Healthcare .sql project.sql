@@ -181,15 +181,6 @@ from appointments a
 left join billing b on a.appointment_id = b.appointment_id
 where b.billing_id is null;
 
--- unpaid bills analysis
-select p.patient_id, p.first_name, p.last_name, sum(b.amount) as total_unpaid 
-from patients p 
-join appointments a on p.patient_id = a.patient_id
-join billing b on a.appointment_id = b.appointment_id
-where b.status = 'pending'
-group by p.patient_id,p.first_name,p.last_name
-order by total_unpaid desc;
-
 -- find all appointments for doctors
 select a.appointment_id,p.first_name as patient_first_name,p.last_name as patient_last_name,a.appointment_date,a.reason
 from appointments a 
